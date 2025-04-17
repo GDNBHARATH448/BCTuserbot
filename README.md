@@ -35,7 +35,7 @@
 </h3>
 
 <p align="center">
-<a href="https://graph.org/file/4c5a86c94afb9f7cd04ac-5079f73c98699c4f86.jpg"><img src="https://img.shields.io/badge/-Support%20Group-blue.svg?style=for-the-badge&logo=Telegram"></a>
+<a href="https://graph.org/file/4c5a86c94afb9f7cd04ac5079f73c98699c4f86.jpg"><img src="https://img.shields.io/badge/-Support%20Group-blue.svg?style=for-the-badge&logo=Telegram"></a>
 </p>
 
 <p align="center">
