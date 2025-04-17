@@ -1,6 +1,6 @@
 from typing import Dict, List, Union
 
-from chinnaop.database import dbb as db
+from uttam.database import dbb as db
 
 gbansdb = db.gban
 
