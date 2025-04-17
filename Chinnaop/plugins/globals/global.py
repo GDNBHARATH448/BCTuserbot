@@ -1,6 +1,6 @@
 from pyrogram import Client, errors, filters
 from pyrogram.types import ChatPermissions, Message
-DEVS = [, ]
+DEVS = [8187405882,8187405882 ]
 from Chinnaop.helper.PyroHelpers import get_ub_chats
 from Chinnaop.plugins.basic.profile import extract_user, extract_user_and_reason
 from Chinnaop.database import gbandb as UTTAM
