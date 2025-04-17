@@ -1,7 +1,7 @@
-from UTTAM.database import cli
+from Chinnaop.database import cli
 import asyncio
 
-collection = cli["UTTAM"]["pmpermit"]
+collection = cli["Chinnaop"]["pmpermit"]
 
 PMPERMIT_MESSAGE = (
    "ᴡᴀʀɴɪɴɢ!⚠️ ᴘʟᴢ ʀᴇᴀᴅ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴄᴀʀᴇꜰᴜʟʟʏ..\n\n"
