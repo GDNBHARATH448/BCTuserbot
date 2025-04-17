@@ -9,7 +9,7 @@ from pyrogram.raw.types import InputGroupCall, InputPeerChannel, InputPeerChat
 from pyrogram.types import Message
 from Chinnaop import SUDO_USER
 from pyrogram.types import Message
-from UTTAM.plugins.help import add_command_help
+from Chinnaop.plugins.help import add_command_help
 
 
 def get_arg(message: Message):
