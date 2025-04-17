@@ -6,7 +6,7 @@ from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 
 from config import LOG_GROUP
-from UTTAM import SUDO_USER 
+from Chinnaop import SUDO_USER 
 
 from Chinnaop.plugins.help import add_command_help
 
