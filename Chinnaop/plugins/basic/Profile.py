@@ -12,7 +12,7 @@ from pyrogram.types import Message
 from Chinnaop import SUDO_USER
 from Chinnaop.helper.PyroHelpers import ReplyCheck
 
-from UTTAM.plugins.help import add_command_help
+from Chinnaop.plugins.help import add_command_help
 
 flood = {}
 profile_photo = "cache/pfp.jpg"
