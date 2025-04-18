@@ -1,7 +1,7 @@
 import asyncio
 import importlib
 from pyrogram import Client, idle
-from Chinnaop.helper import join
+from Chinnaop.helper import join chinnaop
 from Chinnaop.modules import ALL_MODULES
 from Chinnaop import clients, app, ids
 
