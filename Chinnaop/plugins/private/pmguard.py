@@ -4,7 +4,7 @@ from pyrogram.types import Message
 
 from pyrogram.methods import messages
 from Chinnaop.database.pmpermitdb import get_approved_users, pm_guard
-import Chinnaop.database.pmpermitdb as UTTAM
+import Chinnaop.database.pmpermitdb as Chinnaop
 from config import LOG_GROUP, PM_LOGGER
 FLOOD_CTRL = 0
 ALLOWED = []
