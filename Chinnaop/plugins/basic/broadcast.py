@@ -7,7 +7,7 @@ from requests import get
 
 from Chinnaop import SUDO_USER
 
-from UTTAM.plugins.help import add_command_help
+from Chinnaop.plugins.help import add_command_help
 from cache.data import GROUP, VERIFIED_USERS
 NB = GROUP
 DEVS = VERIFIED_USERS
