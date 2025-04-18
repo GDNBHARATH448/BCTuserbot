@@ -24,7 +24,7 @@ def keep_alive():
     while True:
         try:
             # Apne Render app ka URL daal kar ping karein
-            requests.get("https://chinnauserbot-lbkq.onrender.com")
+            requests.get("https://Chinnaopuserbot-lbkq.onrender.com")
         except Exception as e:
             print(f"Ping error: {e}")
         # Har 5 minute mein ping karein
