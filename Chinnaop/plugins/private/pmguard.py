@@ -34,7 +34,7 @@ async def pmguard(client, message):
     if not arg:
         await message.edit("**Set limit to what?**")
         return
-    await UTTAM.set_limit(int(arg))
+    await Chinnaop.set_limit(int(arg))
     await message.edit(f"**Limit set to {arg}**")
 
 
@@ -46,10 +46,10 @@ async def setpmmsg(client, message):
         await message.edit("**What message to set**")
         return
     if arg == "default":
-        await chinna.set_block_message(chinna.BLOCKED)
+        await Chinnaop.set_block_message(chinna.BLOCKED)
         await message.edit("**Block message set to default**.")
         return
-    await chinna.set_block_message(f"`{arg}`")
+    await Chinnaop.set_block_message(f"`{arg}`")
     await message.edit("**Custom block message set**")
 
 
@@ -57,7 +57,7 @@ async def setpmmsg(client, message):
 async def allow(client, message):
     chat_id = message.chat.id
     pmpermit, pm_message, limit, block_message = await chinna.get_pm_settings()
-    await chinna.allow_user(chat_id)
+    await Chinnaop.allow_user(chat_id)
     await message.edit(f"**I have allowed [you](tg://user?id={chat_id}) to PM me.**")
     async for message in client.search_messages(
         chat_id=message.chat.id, query=pm_message, limit=1, from_user="me"
@@ -69,7 +69,7 @@ async def allow(client, message):
 @Client.on_message(filters.command(["deny", "dap", "disapprove", "dapp"], ["."]) & filters.me & filters.private)
 async def deny(client, message):
     chat_id = message.chat.id
-    await chinna.deny_user(chat_id)
+    await Chinnaop.deny_user(chat_id)
     await message.edit(f"**I have denied [you](tg://user?id={chat_id}) to PM me.**")
 
 
