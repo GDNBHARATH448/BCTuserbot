@@ -72,7 +72,7 @@ async def ungban_user(client: Client, message: Message):
             return await ex.edit("`Please specify a valid user!`")
 
     try:
-        if not (await UTTAM.gban_info(user.id)):
+        if not (await Chinnop.gban_info(user.id)):
             return await ex.edit("`User already ungban`")
         ung_chats = await get_ub_chats(client)
         ok.remove(user.id)
@@ -103,7 +103,7 @@ async def ungban_user(client: Client, message: Message):
 
 @Client.on_message(filters.command("listgban", ".") & filters.me)
 async def gbanlist(client: Client, message: Message):
-    users = (await UTTAM.gban_list())
+    users = (await Chinnaop.gban_list())
     ex = await message.edit_text("`Processing...`")
     if not users:
         return await ex.edit("No Users have been Banned yet")
