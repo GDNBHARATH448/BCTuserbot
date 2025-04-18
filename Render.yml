@@ -4,7 +4,7 @@ services:
     name: chinna
     env: python
     buildCommand: pip install -U -r requirements.txt
-    startCommand: python3 server.py & python3 -m UTTAM  
+    startCommand: python3 server.py & python3 -m Chinnaop 
  repo:
 https://github.com/GDNBharat/BCT-userbot-  
     branch: main
