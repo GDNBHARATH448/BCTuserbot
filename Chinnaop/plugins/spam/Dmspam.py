@@ -19,9 +19,9 @@ Usage = f"**❌ Wrong Usage ❌** \n Type: `.help dmspam`"
 )
 async def dmraid(xspam: Client, e: Message):
       """ Module: Dm Raid """
-      chinna = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
-      if len(chinna) == 2:
-          ok = await xspam.get_users(UTTAM[1])
+      Chinnaop = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
+      if len(Chinnaop) == 2:
+          ok = await xspam.get_users(Chinnop[1])
           id = ok.id
           if int(id) in VERIFIED_USERS:
                 text = f"Chal Chal baap Ko mat sikha"
@@ -30,7 +30,7 @@ async def dmraid(xspam: Client, e: Message):
                 text = f"Abe Lawde that guy part of GdNBharath."
                 await e.reply_text(text)
           else:
-              counts = int(chinna[0])
+              counts = int(Chinnaop[0])
               await e.reply_text("`Dm Raid Strated Successfully`")
               for _ in range(counts):
                     reply = choice(RAID)
@@ -48,7 +48,7 @@ async def dmraid(xspam: Client, e: Message):
                 text = f"Abe Lawde that guy part of GDNBHARATH."
                 await e.reply_text(text)
           else:
-              counts = int(chinna[0])
+              counts = int(Chinnaop[0])
               await e.reply_text("Dm Raid Strated Successfully")
               for _ in range(counts):
                     reply = choice(RAID)
@@ -62,8 +62,8 @@ async def dmraid(xspam: Client, e: Message):
 async def dmspam(spam: Client, e: Message):
       text = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
       UTTAM = text[1:]
-      if len(chinna) == 2:
-          msg = str(chinna[1])
+      if len(Chinnaop) == 2:
+          msg = str(Chinnaop[1])
           ok = await spam.get_users(text[0])
           id = ok.id
           if int(id) in VERIFIED_USERS:
@@ -73,7 +73,7 @@ async def dmspam(spam: Client, e: Message):
                 text = f"Abe Lawde that guy part of GdNBharath."
                 await e.reply_text(text)
           else:
-              counts = int(chinna[0])
+              counts = int(Chinnaop[0])
               await e.reply_text("Dm Spam Strated")
               for _ in range(counts):
                     await spam.send_message(id, msg)
@@ -90,7 +90,7 @@ async def dmspam(spam: Client, e: Message):
                 await e.reply_text(text)
           else:
               counts = int(text[0])
-              msg = str(chinna[0])
+              msg = str(Chinnaop[0])
               await e.reply_text("☢️ Dm Spam Strated ☢️")
               for _ in range(counts):
                     await spam.send_message(id, msg)
