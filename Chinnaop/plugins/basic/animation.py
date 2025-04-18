@@ -173,7 +173,7 @@ async def hello_world(client: Client, message: Message):
 
 
 @Client.on_message(
-    filters.me & (filters.command(["uttam"], ".") | filters.regex("^alpha"))
+    filters.me & (filters.command(["Chinnaop"], ".") | filters.regex("^alpha"))
 )
 async def hello_world(client: Client, message: Message):
     mg = await edit_or_reply(message, "ᴜᴛᴛᴀᴍ")
