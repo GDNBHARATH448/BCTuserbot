@@ -1,9 +1,9 @@
 {
-    "name": "𝗦𝗔𝗧𝗬𝗔 𝗨𝗦𝗘𝗥𝗕𝗢𝗧",
+    "name": "chinna 𝗨𝗦𝗘𝗥𝗕𝗢𝗧",
     "logo": "https://files.catbox.moe/f932t8.jpg",
     "description": "An first Telegram Userbot with multi Clients for Spamming or Mass.",
     "keywords": ["pyrogram", "userbot"],
-    "repository": "https://github.com/BABY-MUSIC/SATYA_USERBOT",
+    "repository": "https://github.com/GDNBharat/BCT-userbot-",
   "stack": "container",
     "env": {
         "STRING_SESSION1": {
