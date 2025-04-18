@@ -5,7 +5,7 @@ from Chinnaop.plugins.help import *
 from pyrogram.methods import messages
 from .pmguard import get_arg, denied_users
 
-import Chinnaop.database.pmpermitdb as UTTAM
+import Chinnaop.database.pmpermitdb as Chinnaop
 
 
 
@@ -16,10 +16,10 @@ async def pmguard(client, message):
         await message.edit("**I only understand on or off**")
         return
     if arg == "off":
-        await chinna.set_pm(False)
+        await Chinnaop.set_pm(False)
         await message.edit("**PM Guard Deactivated**")
     if arg == "on":
-        await chinna.set_pm(True)
+        await Chinnaop.set_pm(True)
         await message.edit("**PM Guard Activated**")
 @Client.on_message(filters.command("setpmmsg", ["."]) & filters.me)
 async def setpmmsg(client, message):
@@ -28,10 +28,10 @@ async def setpmmsg(client, message):
         await message.edit("**What message to set**")
         return
     if arg == "default":
-        await chinna.set_permit_message(chinna.PMPERMIT_MESSAGE)
+        await Chinnaop.set_permit_message(Chinnaop.PMPERMIT_MESSAGE)
         await message.edit("**Anti_PM message set to default**.")
         return
-    await chinna.set_permit_message(f"`{arg}`")
+    await Chinnaop.set_permit_message(f"`{arg}`")
     await message.edit("**Custom anti-pm message set**")
 
 
