@@ -49,7 +49,7 @@ async def _autopic(_, delay):
 @Client.on_message(
     filters.command(["autopic"], ".") & (filters.me | filters.user(SUDO_USER))
 )
-async def autopic_UTTAM(_, m):
+async def autopic_chinna(_, m):
     global __XOR
     arc = await eor(m, "...")
     if bool(__XOR):
