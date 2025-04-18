@@ -1,7 +1,7 @@
 from pyrogram import filters, Client
 from pyrogram.types import Message
 
-from UTTAM.plugins.help import add_command_help
+from Chinnaop.plugins.help import add_command_help
 
 the_regex = r"^r\/([^\s\/])+"
 
