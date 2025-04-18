@@ -1,7 +1,7 @@
 import asyncio
 from pyrogram import Client, idle
-from Chinnaop.helper import join
-from Chinnaop import clients, app, ids
+from chinnaop.helper import join
+from chinnaop import clients, app, ids
 from flask import Flask
 import threading
 import requests
