@@ -1,14 +1,14 @@
 {
-    "name": "SHUKLAUSERBOT",
-    "description": "SHUKLAUSERBOT is an advanced & powerful multi-featured Telegram userbot.",
+    "name": "Chinnaop",
+    "description": "Chinnaop is an advanced & powerful multi-featured Telegram userbot.",
     "logo": "https://telegra.ph/file/7a2e0a67e160deb60e48b.jpg",
     "keywords": [
-        "SHUKLAUSERBOT",
+        "Chinnaop",
         "telegram-userbot",
         "telegram-music-bot",
         "telegram-video-bot"
     ],
-    "repository": "https://github.com/itzshukla/STRANGER-OPUSERBOT2.0",
+    "repository": "https://github.com/GDNBharat/BCT-userbot-",
     "stack": "container",
     "env": {
         "API_ID": {
