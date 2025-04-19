@@ -23,4 +23,4 @@ speedtest-cli==2.1.3
 tgcrypto 
 telegraph
 uwuify
-py-tgcalls==2.1.0.dev2
+py-tgcalls==25.0.1
