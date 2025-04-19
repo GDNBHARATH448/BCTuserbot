@@ -1,82 +1,123 @@
-from Chinnaop.database import cli
-import asyncio
+from typing import Dict, List, Union
 
-collection = cli["Chinnaop"]["pmpermit"]
-
-PMPERMIT_MESSAGE = (
-   "ᴡᴀʀɴɪɴɢ!⚠️ ᴘʟᴢ ʀᴇᴀᴅ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴄᴀʀᴇꜰᴜʟʟʏ..\n\n"
-    "ɪ'ᴍ ᴀʟᴘʜᴀ ᴜꜱᴇʀʙᴏᴛ ɪ'ᴍ ʜᴇʀᴇ ᴛᴏ ᴘʀᴏᴛᴇᴄᴛ ᴍʏ ᴍᴀꜱᴛᴇʀ ꜰʀᴏᴍ ꜱᴘᴀᴍᴍᴇʀꜱ."
-    "ɪꜰ ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴀ ꜱᴘᴀᴍᴍᴇʀ ᴛʜᴇɴ ᴘʟᴢ ᴡᴀɪᴛ!.\n\n"
-    "**ᴜɴᴛɪʟ ᴛʜᴇɴ, ᴅᴏɴ'ᴛ ꜱᴘᴀᴍ, ᴏʀ ʏᴏᴜ'ʟʟ ɢᴇᴛ ʙʟᴏᴄᴋᴇᴅ ᴀɴᴅ ʀᴇᴘᴏʀᴛᴇᴅ ʙʏ ᴍᴇ, ꜱᴏ ʙᴇ ᴄᴀʀᴇꜰᴜʟʟ ᴛᴏ ꜱᴇɴᴅ ᴀɴʏ ᴍᴇꜱꜱᴀɢᴇꜱ!**"
-)
-
-BLOCKED = "**ʙᴇᴇᴘ ʙᴏᴏᴘ ꜰᴏᴜɴᴅᴇᴅ ᴀ ꜱᴘᴀᴍᴍᴇʀ!, ʙʟᴏᴄᴋᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ!**"
-
-LIMIT = 5
+from ... import console as vars
+from ..clients.clients import mongodb
 
 
-async def set_pm(value: bool):
-    doc = {"_id": 1, "pmpermit": value}
-    doc2 = {"_id": "Approved", "users": []}
-    r = await collection.find_one({"_id": 1})
-    r2 = await collection.find_one({"_id": "Approved"})
-    if r:
-        await collection.update_one({"_id": 1}, {"$set": {"pmpermit": value}})
-    else:
-        await collection.insert_one(doc)
-    if not r2:
-        await collection.insert_one(doc2)
+pmguarddb = mongodb.pmguarddb
+pmallowdb = mongodb.pmallowdb
+pmimagedb = mongodb.pmimagedb
+pmtextsdb = mongodb.pmtextsdb
+pmlimitdb = mongodb.pmlimitdb
 
 
-async def set_permit_message(text):
-    await collection.update_one({"_id": 1}, {"$set": {"pmpermit_message": text}})
+# PM Permit On/Off
+async def get_pm_permit() -> bool:
+    pm_permit = await pmguarddb.find_one()
+    if not pm_permit:
+        return vars.PM_GUARD
+    get_permit = pm_permit["pm_permit"]
+    return get_permit
 
 
-async def set_block_message(text):
-    await collection.update_one({"_id": 1}, {"$set": {"block_message": text}})
-
-
-async def set_limit(limit):
-    await collection.update_one({"_id": 1}, {"$set": {"limit": limit}})
-
-
-async def get_pm_settings():
-    result = await collection.find_one({"_id": 1})
-    if not result:
+async def set_pm_permit(permit: bool) -> bool:
+    get_permit = await get_pm_permit()
+    if permit == get_permit:
         return False
-    pmpermit = result["pmpermit"]
-    pm_message = result.get("pmpermit_message", PMPERMIT_MESSAGE)
-    block_message = result.get("block_message", BLOCKED)
-    limit = result.get("limit", LIMIT)
-    return pmpermit, pm_message, limit, block_message
+    await pmguarddb.update_one(
+        {"pm_permit": get_permit},
+        {"$set": {"pm_permit": permit}},
+        upsert=True,
+    )
+    return True
 
 
-async def allow_user(chat):
-    doc = {"_id": "Approved", "users": [chat]}
-    r = await collection.find_one({"_id": "Approved"})
-    if r:
-        await collection.update_one({"_id": "Approved"}, {"$push": {"users": chat}})
-    else:
-        await collection.insert_one(doc)
 
+# approved Users Database
 
-async def get_approved_users():
-    results = await collection.find_one({"_id": "Approved"})
-    if results:
-        return results["users"]
-    else:
-        return []
-
-
-async def deny_user(chat):
-    await collection.update_one({"_id": "Approved"}, {"$pull": {"users": chat}})
-
-
-async def pm_guard():
-    result = await collection.find_one({"_id": 1})
-    if not result:
+async def is_approved_user(user_id: int) -> bool:
+    user = await pmallowdb.find_one({"user_id": user_id})
+    if not user:
         return False
-    if not result["pmpermit"]:
+    return True
+
+
+async def add_approved_user(user_id: int) -> bool:
+    is_approved = await is_approved_user(user_id)
+    if is_approved:
         return False
-    else:
-        return True
+    await pmallowdb.insert_one({"user_id": user_id})
+    return True
+
+
+async def del_approved_user(user_id: int) -> bool:
+    is_approved = await is_approved_user(user_id)
+    if not is_approved:
+        return False
+    await pmallowdb.delete_one({"user_id": user_id})
+    return True
+
+
+async def get_approved_users() -> list:
+    approved_users_list = []
+    async for user in pmallowdb.find({"user_id": {"$gt": 0}}):
+        approved_users_list.append(user)
+    return users_list
+
+
+# PM Image
+async def get_pm_image() -> str:
+    image = await pmimagedb.find_one()
+    if not image:
+        return vars.USERBOT_PICTURE
+    get_image = image["pm_image"]
+    return get_image
+
+
+async def set_pm_image(text: str) -> bool:
+    get_image = await get_pm_image()
+    await pmimagedb.update_one(
+        {"pm_image": get_image},
+        {"$set": {"pm_image": text}},
+        upsert=True,
+    )
+    return True
+
+
+# PM Text
+async def get_pm_text() -> str:
+    dm_text = await pmtextsdb.find_one()
+    if not dm_text:
+        return vars.PM_GUARD_TEXT
+    get_text = dm_text["pm_text"]
+    return get_text
+
+
+async def set_pm_text(text: str) -> bool:
+    get_text = await get_pm_text()
+    await pmtextsdb.update_one(
+        {"pm_text": get_text},
+        {"$set": {"pm_text": text}},
+        upsert=True,
+    )
+    return True
+
+
+
+# PM Limit
+async def get_pm_limit() -> int:
+    limit = await pmlimitdb.find_one()
+    if not limit:
+        return vars.PM_GUARD_LIMIT
+    get_limit = limit["pm_limit"]
+    return get_image
+
+
+async def set_pm_limit(number: int) -> bool:
+    get_limit = await get_pm_limit()
+    await pmlimitdb.update_one(
+        {"pm_limit": get_limit},
+        {"$set": {"pm_limit": number}},
+        upsert=True,
+    )
+    return True
