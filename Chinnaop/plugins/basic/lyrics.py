@@ -3,11 +3,11 @@ import asyncio
 from pyrogram import filters, Client
 from pyrogram.types import Message
 
-from Chinnaop import SUDO_USER
-from Chinnaop.plugins.help import add_command_help
+from ... import app, SUDO_USER
+from ... import *
 
 
-@Client.on_message(
+@app.on_message(
     filters.command(["l", "lyrics"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def send_lyrics(bot: Client, message: Message):
@@ -59,4 +59,9 @@ async def send_lyrics(bot: Client, message: Message):
         await message.delete()
 
 
-add_command_help("lyrics", [[".l `or` .lyrics", "Search lyrics and send."]])
+
+__NAME__ = "Lʏʀɪᴄs"
+__MENU__ = """
+`.l` - **Search lyrics and send..**
+
+"""
