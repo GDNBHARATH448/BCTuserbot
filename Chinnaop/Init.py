@@ -40,32 +40,32 @@ app = Client(
 # Additional clients using session strings, all loading plugins from the same folder
 if STRING_SESSION1:
    print("Client1: Found.. Starting..📳")
-   client1 = Client(name="one", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION1, plugins=dict(root="UTTAM/plugins"))
+   client1 = Client(name="one", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION1, plugins=dict(root="Chinnaop/plugins"))
    clients.append(client1)
 
 if STRING_SESSION2:
    print("Client2: Found.. Starting.. 📳")
-   client2 = Client(name="two", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION2, plugins=dict(root="UTTAM/plugins"))
+   client2 = Client(name="two", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION2, plugins=dict(root="Chinnaop/plugins"))
    clients.append(client2)
 
 if STRING_SESSION3:
    print("Client3: Found.. Starting.. 📳")
-   client3 = Client(name="three", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION3, plugins=dict(root="UTTAM/plugins"))
+   client3 = Client(name="three", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION3, plugins=dict(root="Chinnaop/plugins"))
    clients.append(client3)
 
 if STRING_SESSION4:
    print("Client4: Found.. Starting.. 📳")
-   client4 = Client(name="four", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION4, plugins=dict(root="UTTAM/plugins"))
+   client4 = Client(name="four", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION4, plugins=dict(root="Chinnaop/plugins"))
    clients.append(client4)
 
 if STRING_SESSION5:
    print("Client5: Found.. Starting.. 📳")
-   client5 = Client(name="five", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION5, plugins=dict(root="UTTAM/plugins"))
+   client5 = Client(name="five", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION5, plugins=dict(root="Chinnaop/plugins"))
    clients.append(client5)
 
 if STRING_SESSION6:
    print("Client6: Found.. Starting.. 📳")
-   client6 = Client(name="six", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION6, plugins=dict(root="UTTAM/plugins"))
+   client6 = Client(name="six", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION6, plugins=dict(root="Chinnaop/plugins"))
    clients.append(client6)
 
 if STRING_SESSION7:
