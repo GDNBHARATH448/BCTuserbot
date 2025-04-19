@@ -1,98 +1,84 @@
-from math import ceil
-from traceback import format_exc
+import asyncio
 
-from pyrogram.errors import MessageNotModified
-from pyrogram.types import (
-    InlineKeyboardButton,
-    InlineQueryResultArticle,
-    InputTextMessageContent,
-)
-
-from Chinnaop import ids as list_users
-
-looters = None
+from ... import *
+from .buttons import *
+from .wrapper import *
+from pyrogram.types import *
 
 
-def paginate_help(page_number, loaded_modules, prefix):
-    number_of_rows = 5
-    number_of_cols = 3
-    global looters
-    looters = page_number
-    helpable_modules = [p for p in loaded_modules if not p.startswith("_")]
-    helpable_modules = sorted(helpable_modules)
-    modules = [
-        InlineKeyboardButton(
-            text="{}".format(x),
-            callback_data=f"ub_modul_{x}",
+async def help_menu_logo(answer):
+    image = None
+    if image:
+        thumb_image = image
+    else:
+        thumb_image = "https://files.catbox.moe/r58nec.jpg"
+    button = paginate_plugins(0, plugs, "help")
+    answer.append(
+        InlineQueryResultPhoto(
+            photo_url=f"{thumb_image}",
+            title="💫 ʜᴇʟᴘ ᴍᴇɴᴜ  ✨",
+            thumb_url=f"{thumb_image}",
+            description=f"🥀 Open Help Menu Of SHUKLAUSERBOT ✨...",
+            caption=f"""
+            **💫 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ʜᴇʟᴘ ᴍᴇɴᴜ ᴏᴘ.
+sʜᴜᴋʟᴀ ᴜsᴇʀʙᴏᴛ  » {__version__} ✨
+ 
+❤️ᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴs ᴛᴏ
+ɢᴇᴛ ᴜsᴇʀʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs ❤️
+ 
+🌹ᴘᴏᴡᴇʀᴇᴅ ʙʏ ♡  [  ᴜᴘᴅᴀᴛᴇ ](https://t.me/aboutchinnalu) 🌹**""",
+            reply_markup=InlineKeyboardMarkup(button),
         )
-        for x in helpable_modules
-    ]
-    pairs = list(zip(modules[::number_of_cols], modules[1::number_of_cols]))
-    if len(modules) % number_of_cols == 1:
-        pairs.append((modules[-1],))
-    max_num_pages = ceil(len(pairs) / number_of_rows)
-    modulo_page = page_number % max_num_pages
-    if len(pairs) > number_of_rows:
-        pairs = pairs[
-            modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
-        ] + [
-            (
-                InlineKeyboardButton(
-                    text="✘", callback_data=f"{prefix}_prev({modulo_page})"
-                ),
-                InlineKeyboardButton(text="ᴄʟᴏsᴇ", callback_data="close_help"),
-                InlineKeyboardButton(
-                    text="✘", callback_data=f"{prefix}_next({modulo_page})"
-                ),
-            )
-        ]
-    return pairs
+    )
+    return answer
 
 
-def cb_wrapper(func):
-    async def wrapper(client, cb):
-        users = list_users
-        if cb.from_user.id not in users:
-            await cb.answer(
-                "Kya Hai? Kaam kar apna!",
-                cache_time=0,
-                show_alert=True,
-            )
-        else:
+async def help_menu_text(answer):
+    from ... import __version__
+    button = paginate_plugins(0, plugs, "help")
+    answer.append(
+        InlineQueryResultArticle(
+            title="💫 ʜᴇʟᴘ ᴍᴇɴᴜ  ✨",
+            input_message_content=InputTextMessageContent(f"""
+            **💫 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ʜᴇʟᴘ ᴍᴇɴᴜ ᴏᴘ.
+sʜᴜᴋʟᴀ ᴜsᴇʀʙᴏᴛ  » {__version__} ✨
+ 
+❤️ᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴs ᴛᴏ
+ɢᴇᴛ ᴜsᴇʀʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs ❤️
+ 
+🌹ᴘᴏᴡᴇʀᴇᴅ ʙʏ ♡  [ ᴜᴘᴅᴀᴛᴇ ](https://t.me/aboutchinnalu) 🌹**""",
+            disable_web_page_preview=True
+            ),
+            reply_markup=InlineKeyboardMarkup(button),
+        )
+    )
+    return answer
+
+
+async def run_async_inline():
+    @bot.on_inline_query()
+    @inline_wrapper
+    async def inline_query_handler(bot, query):
+        text = query.query
+        if text.startswith("help_menu_logo"):
+            answer = []
+            answer = await help_menu_logo(answer)
             try:
-                await func(client, cb)
-            except MessageNotModified:
-                await cb.answer("🤔🧐")
-            except Exception:
-                print(format_exc())
-                await cb.answer(
-                    f"Oh No, SomeThing Isn't Right. Please Check Logs!",
-                    cache_time=0,
-                    show_alert=True,
+                await bot.answer_inline_query(
+                    query.id, results=answer, cache_time=10
                 )
-
-    return wrapper
-
-
-def inline_wrapper(func):
-    async def wrapper(client, inline_query):
-        users = list_users
-        if inline_query.from_user.id not in users:
-            await client.answer_inline_query(
-                inline_query.id,
-                cache_time=1,
-                results=[
-                    (
-                        InlineQueryResultArticle(
-                            title="Sorry, Friend You Can't Use Me!",
-                            input_message_content=InputTextMessageContent(
-                                "You cannot access this Bot"
-                            ),
-                        )
-                    )
-                ],
-            )
+            except Exception as e:
+                print(str(e))
+                return
+        elif text.startswith("help_menu_text"):
+            answer = []
+            answer = await help_menu_text(answer)
+            try:
+                await bot.answer_inline_query(
+                    query.id, results=answer, cache_time=10
+                )
+            except Exception as e:
+                print(str(e))
+                return
         else:
-            await func(client, inline_query)
-
-    return wrapper
+            return
