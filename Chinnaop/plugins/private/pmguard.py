@@ -1,107 +1,124 @@
-from pyrogram import filters, Client
 import asyncio
-from pyrogram.types import Message 
 
-from pyrogram.methods import messages
-from Chinnaop.database.pmpermitdb import get_approved_users, pm_guard
-import Chinnaop.database.pmpermitdb as Chinnaop
-from config import LOG_GROUP, PM_LOGGER
-FLOOD_CTRL = 0
-ALLOWED = []
-USERS_AND_WARNS = {}
+from pyrogram import filters
+from pyrogram.enums import ChatType
+
+from ... import app, cdx, eor, vars
+from ...modules.mongo.pmguard import *
 
 
-async def denied_users(filter, client: Client, message: Message):
-    if not await pm_guard():
-        return False
-    if message.chat.id in (await get_approved_users()):
-        return False
+@app.on_message(cdx(["pm", "pmpermit", "pmguard"]) & filters.me)
+async def pm_on_off(client, message):
+    if len(message.command) < 2:
+        return await eor(message,
+            "Hey, What You Want To Do ?\n\nExample: `.pm on` | `.pm off`")
+    aux = await eor(message, "Processing ...")
+    query = message.text.split(None, 1)[1].lower()
+    if query == "on":
+        set_permit = await set_pm_permit(True)
+        if set_permit:
+            return await aux.edit("PM Permit Turned On !")
+        return await aux.edit("PM Permit Already On !")
+        
+    elif query == "off":
+        set_permit = await set_pm_permit(False)
+        if set_permit:
+            return await aux.edit("PM Permit Turned Off !")
+        return await aux.edit("PM Permit Already Off !")
+        
+
+
+@app.on_message(cdx(["a", "approve"]) & filters.private  & filters.me)
+async def pm_approve(client, message):
+    check = vars.OLD_MSG
+    flood = vars.FLOODXD
+    uid = message.chat.id
+    if message.reply_to_message:
+        reply = message.reply_to_message
+        replied_user = reply.from_user
+        if replied_user.is_self:
+            return await message.edit("You can't do that to yourself.")
+    permit = await add_approved_user(uid)
+    if permit:
+        if str(uid) in check and str(uid) in flood:
+            try:
+                await check[str(uid)].delete()
+                flood[str(uid)] = 0
+            except BaseException:
+                pass
+        await message.edit("Successfully Approved.")
     else:
-        return True
-
-def get_arg(message):
-    msg = message.text
-    msg = msg.replace(" ", "", 1) if msg[1] == " " else msg
-    split = msg[1:].replace("\n", " \n").split(" ")
-    if " ".join(split[1:]).strip() == "":
-        return ""
-    return " ".join(split[1:])
+        await message.edit("This user already approved.")
+    await asyncio.sleep(2)
+    return await message.delete()
 
 
-@Client.on_message(filters.command("setlimit", ["."]) & filters.me)
-async def pmguard(client, message):
-    arg = get_arg(message)
-    if not arg:
-        await message.edit("**Set limit to what?**")
-        return
-    await Chinnaop.set_limit(int(arg))
-    await message.edit(f"**Limit set to {arg}**")
+@app.on_message(cdx(["da", "disapprove"]) & filters.private & filters.me)
+async def pm_disapprove(client, message):
+    uid = message.chat.id
+    if message.reply_to_message:
+        reply = message.reply_to_message
+        replied_user = reply.from_user
+        if replied_user.is_self:
+            return await message.edit("You can't do that to yourself.")
+    permit = await del_approved_user(uid)
+    if permit:
+        await message.edit("Successfully Disapproved.")
+    else:
+        await message.edit("This user is not approved !")
+    await asyncio.sleep(2)
+    return await message.delete()
 
 
-
-@Client.on_message(filters.command("setblockmsg", ["."]) & filters.me)
-async def setpmmsg(client, message):
-    arg = get_arg(message)
-    if not arg:
-        await message.edit("**What message to set**")
-        return
-    if arg == "default":
-        await Chinnaop.set_block_message(Chinnaop.BLOCKED)
-        await message.edit("**Block message set to default**.")
-        return
-    await Chinnaop.set_block_message(f"`{arg}`")
-    await message.edit("**Custom block message set**")
-
-
-@Client.on_message(filters.command(["allow", "ap", "approve", "a"], ["."]) & filters.me & filters.private)
-async def allow(client, message):
-    chat_id = message.chat.id
-    pmpermit, pm_message, limit, block_message = await Chinnaop.get_pm_settings()
-    await Chinnaop.allow_user(chat_id)
-    await message.edit(f"**I have allowed [you](tg://user?id={chat_id}) to PM me.**")
-    async for message in client.search_messages(
-        chat_id=message.chat.id, query=pm_message, limit=1, from_user="me"
-    ):
-        await message.delete()
-    USERS_AND_WARNS.update({chat_id: 0})
+@app.on_message(cdx(["block"]) & filters.me)
+async def block_user_func(client, message):
+    if message.chat.type == ChatType.PRIVATE:
+        user_id = message.chat.id
+    elif message.chat.type != ChatType.PRIVATE:
+        if not message.reply_to_message:
+            return await message.edit("Reply to user message.")
+        reply = message.reply_to_message
+        replied_user = reply.from_user
+        if replied_user.is_self:
+            return await message.edit("You can't do that to yourself.")
+        user_id = replied_user.id
+    await message.edit("Successfully Block User!!!")
+    await client.block_user(user_id)
 
 
-@Client.on_message(filters.command(["deny", "dap", "disapprove", "dapp"], ["."]) & filters.me & filters.private)
-async def deny(client, message):
-    chat_id = message.chat.id
-    await Chinnaop.deny_user(chat_id)
-    await message.edit(f"**I have denied [you](tg://user?id={chat_id}) to PM me.**")
+@app.on_message(cdx(["unblock"]) & filters.me)
+async def unblock_user_func(client, message):
+    if message.chat.type == ChatType.PRIVATE:
+        user_id = message.chat.id
+    elif message.chat.type != ChatType.PRIVATE:
+        if not message.reply_to_message:
+            return await message.edit("Reply to user message.")
+        reply = message.reply_to_message
+        replied_user = reply.from_user
+        if replied_user.is_self:
+            return await message.edit("You can't do that to yourself.")
+        user_id = replied_user.id
+    await client.unblock_user(user_id)
+    await message.edit("Unblock User Successfully !")
 
 
-@Client.on_message(
-    filters.private
-    & filters.create(denied_users)
-    & filters.incoming
-    & ~filters.service
-    & ~filters.me
-    & ~filters.bot
-)
-async def reply_pm(app: Client, message):
-    global FLOOD_CTRL
-    pmpermit, pm_message, limit, block_message = await Chinnaop.get_pm_settings()
-    user = message.from_user.id
-    user_warns = 0 if user not in USERS_AND_WARNS else USERS_AND_WARNS[user]
-    if PM_LOGGER:
-        await app.send_message(PM_LOGGER, f"{message.text}")
-    if user_warns <= limit - 2:
-        user_warns += 1
-        USERS_AND_WARNS.update({user: user_warns})
-        if not FLOOD_CTRL > 0:
-            FLOOD_CTRL += 1
-        else:
-            FLOOD_CTRL = 0
-            return
-        async for message in app.search_messages(
-            chat_id=message.chat.id, query=pm_message, limit=1, from_user="me"
-        ):
-            await message.delete()
-        await message.reply(pm_message, disable_web_page_preview=True)
-        return
-    await message.reply(block_message, disable_web_page_preview=True)
-    await app.block_user(message.chat.id)
-    USERS_AND_WARNS.update({user: 0})
+__NAME__ = "Gᴜᴀʀᴅ "
+__MENU__ = f"""
+**🥀 An Advanced Security System
+To Protect From DM Spams ✨.**
+
+`.pmguard [`on`|off`] - Activate
+or Deactivate PM Guard Security.
+
+`.approve` - Approve An User For
+Chat With in DM.
+
+`.disapprove` - To Disapprove An
+User (Remove From Allowed List).
+
+`.block` - Block An User And Add
+in Your Blocklist.
+
+`.unblock` - Unblock An User And
+Renove From Your Blocklist.
+"""
