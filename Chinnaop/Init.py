@@ -1,21 +1,58 @@
-import glob
-from os.path import dirname, isfile
+from Chinnaop.console import  SUDO_USERS, OWNER_ID, OWNER_USERNAME
+from aiohttp import ClientSession
+
+# Ai-Userbot Version
+__version__ = "v2.1.0"
+
+spam_chats = []
+aiosession = ClientSession()
+SUDO_USER = SUDO_USERS
+OWNER_USERNAME = OWNER_USERNAME
+SUDO_USERS.append(OWNER_ID)
 
 
-def __list_all_plugins():
-    work_dir = dirname(__file__)
-    mod_paths = glob.glob(work_dir + "/*/*.py")
-
-    all_plugins = [
-        (((f.replace(work_dir, "")).replace("/", "."))[:-3])
-        for f in mod_paths
-        if isfile(f)
-        and f.endswith(".py")
-        and not f.endswith("__init__.py")
-    ]
-
-    return all_plugins
+# All Clients
+from .modules.clients.clients import (
+    app, bot, call
+)
+app = app
+bot = bot
+call = call
 
 
-ALL_PLUGINS = sorted(__list_all_plugins())
-__all__ = ALL_PLUGINS + ["ALL_PLUGINS"]
+# Command Handlers
+from .modules.helpers.filters import (
+    commandx, commandz
+)
+cdx = commandx
+cdz = commandz
+
+
+# Edit Or Reply
+from .modules.helpers.events import (
+    edit_or_reply
+)
+eor = edit_or_reply
+
+
+# Logger
+from .console import LOGGER
+logs = LOGGER
+
+
+# Plugins
+from .console import PLUGINS
+plugs = PLUGINS
+
+
+# Variables
+from . import console as config
+vars = config
+
+
+# Decorators
+from .modules.helpers.wrapper import (
+    super_user_only, sudo_users_only
+)
+super_user_only = super_user_only
+sudo_users_only = sudo_users_only
