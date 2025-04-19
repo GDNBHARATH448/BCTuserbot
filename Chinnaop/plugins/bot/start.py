@@ -1,44 +1,145 @@
-from Chinnaop import app, API_ID, API_HASH
-from config import ALIVE_PIC
-from pyrogram import filters
-import os
-import re
-import asyncio
-import time
-from pyrogram import *
-from pyrogram.types import * 
+import os, sys
 
-PHONE_NUMBER_TEXT = (
-    "╭────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼ ──── ⚘\n┆⚘ ʜᴇʏ, ɪ ᴀᴍ : [˹ 🅢ᴀᴛʏᴀ 🅤sᴇʀʙᴏᴛ ˼](https://t.me/Chinnaop_USER_RBOT)\n┆⚘ ᴍᴏʀᴇ ᴀɴɪᴍᴀᴛɪᴏɴ,ғᴜɴ\n┊⚘ ᴘᴏᴡᴇʀғᴜʟ & ᴜsᴇғᴜʟ ᴜsᴇʀʙᴏᴛ\n╰───────────────────────\n────────────────────────\n❍ нσɯ тσ υʂҽ тнιʂ вσᴛ - [ᴛɪᴘs ʜᴇʀᴇ](https://t.me/aboutchinnalu) \n────────────────────────\n❍ ʂҽʂʂισɳʂ ɠҽɳ вσᴛ ⁚ [sᴇssɪᴏɴ-ʙᴏᴛ](https://t.me/aboutchinnalu) \n────────────────────────\n❍ ¢ℓσɳҽ вσт ⁚ /clone [ ʂᴛɾιɳg ʂҽʂʂισɳ ]\n────────────────────────\n❍ ᴘσɯҽɾҽᴅ ʙу ⏤‌‌‌‌  [˹ ʙᴀʙʏ-ᴍᴜsɪᴄ ™˼𓅂](https://t.me/aboutchinnalu) \n────────────────────────"
+from pyrogram import Client
+from pyrogram import filters
+from pytgcalls import PyTgCalls
+from motor.motor_asyncio import AsyncIOMotorClient
+
+from ...console import API_ID, API_HASH, STRING_SESSION
+from ...console import BOT_TOKEN, SESSION_STRING, LOGGER
+from ...console import MONGO_DB_URL, LOG_GROUP_ID, SUDOERS
+
+
+def async_config():
+    LOGGER.info("Checking Variables ...")
+    if not API_ID:
+        LOGGER.info("'API_ID' - Not Found !")
+        sys.exit()
+    if not API_HASH:
+        LOGGER.info("'API_HASH' - Not Found !")
+        sys.exit()
+    if not BOT_TOKEN:
+        LOGGER.info("'BOT_TOKEN' - Not Found !")
+        sys.exit()
+    if not STRING_SESSION:
+        LOGGER.info("'STRING_SESSION' - Not Found !")
+        sys.exit()
+    if not MONGO_DB_URL:
+        LOGGER.info("'MONGO_DB_URL' - Not Found !")
+        sys.exit()
+    if not LOG_GROUP_ID:
+        LOGGER.info("'LOG_GROUP_ID' - Not Found !")
+        sys.exit()
+    LOGGER.info("All Required Variables Collected.")
+
+
+def async_dirs():
+    LOGGER.info("Initializing Directories ...")
+    if "downloads" not in os.listdir():
+        os.mkdir("downloads")
+    if "cache" not in os.listdir():
+        os.mkdir("cache")
+    
+    for file in os.listdir():
+        if file.endswith(".session"):
+            os.remove(file)
+    for file in os.listdir():
+        if file.endswith(".session-journal"):
+            os.remove(file)
+    LOGGER.info("Directories Initialized.")
+
+async_dirs()
+    
+
+app = Client(
+    name = "Chinnaop",
+    api_id = API_ID,
+    api_hash = API_HASH,
+    session_string = STRING_SESSION,
 )
 
-@app.on_message(filters.command("start"))
-async def hello(client: app, message):
-    buttons = [
-           [
-                InlineKeyboardButton("˹ ᴏᴡɴᴇʀ ˼", url="https://t.me/aboutchinnalu"),
-                InlineKeyboardButton("˹ ᴜᴘᴅᴀᴛᴇ ˼", url="https://t.me/aboutchinnalu"),
-            ],
-            [
-                InlineKeyboardButton("˹ sᴜᴘᴘᴏʀᴛ ˼", url="https://t.me/aboutchinnalu"),
-                InlineKeyboardButton("˹ ᴍᴜsɪᴄ ˼", url="https://t.me/aboutchinnalu"),
-            ],
-            ]
-    reply_markup = InlineKeyboardMarkup(buttons)
-    await client.send_photo(message.chat.id, ALIVE_PIC, caption=PHONE_NUMBER_TEXT, reply_markup=reply_markup)
+ass = Client(
+    name = "ChinnaopPlayer",
+    api_id = API_ID,
+    api_hash = API_HASH,
+    session_string = SESSION_STRING,
+)
 
-@app.on_message(filters.command("clone"))
-async def clone(bot: app, msg: Message):
-    chat = msg.chat
-    text = await msg.reply("ᴜsᴀɢᴇ:\n\n /clone session")
-    cmd = msg.command
-    phone = msg.command[1]
+bot = Client(
+    name = "ChinnaopSUPPORT",
+    api_id = API_ID,
+    api_hash = API_HASH,
+    bot_token = BOT_TOKEN,
+)
+
+
+if not SESSION_STRING:
+    call = PyTgCalls(app)
+else:
+    call = PyTgCalls(ass)
+
+
+def mongodbase():
+    global mongodb
     try:
-        await text.edit("sᴀᴛʏᴀ ᴘʀᴏᴄᴇssɪɴɢ.....✲")
-                   # change this Directry according to ur repo
-        client = Client(name="Melody", api_id=API_ID, api_hash=API_HASH, session_string=phone, plugins=dict(root="Chinnaop/plugins"))
-        await client.start()
-        user = await client.get_me()
-        await msg.reply(f" 𝗝𝗔 𝗣𝗘𝗟 𝗗𝗘 𝗦𝗔𝗕𝗞𝗢 𝗔𝗕 chinna 𝗞𝗢 𝗣𝗔𝗣𝗔 𝗕𝗢𝗟 𝗞𝗘 𝗝𝗔𝗡𝗔 🥵 {user.first_name} 💨.")
-    except Exception as e:
-        await msg.reply(f"**ERROR:** `{str(e)}`\nPress /start to Start again.")
+        LOGGER.info("Connecting To Your Database ...")
+        async_client = AsyncIOMotorClient
+        mongobase = async_client(MONGO_DB_URL)
+        mongodb = mongobase.Chinnaop
+        LOGGER.info("Conected To Your Database.")
+    except:
+        LOGGER.error("Failed To Connect, Please Change Your Mongo Database !")
+        sys.exit()
+
+mongodbase()
+
+
+async def sudo_users():
+    sudoersdb = mongodb.sudoers
+    sudoers = await sudoersdb.find_one({"sudo": "sudo"})
+    sudoers = [] if not sudoers else sudoers["sudoers"]
+    if sudoers:
+        for user_id in sudoers:
+            SUDOERS.append(int(user_id))
+    LOGGER.info(f"Sudo Users Loaded.")
+    
+
+async def run_async_clients():
+    LOGGER.info("Starting Userbot ...")
+    await app.start()
+    LOGGER.info("Userbot Started.")
+    try:
+        await app.send_message(LOG_GROUP_ID, "**sʜᴜᴋʟᴀ ᴜsᴇʀʙᴏᴛ ɪs ᴀʟɪᴠᴇ**")
+    except:
+        pass
+    try:
+        await app.join_chat("aboutchinnalu")
+        await app.join_chat("aboutchinnalu")
+    except:
+        pass
+    if SESSION_STRING:
+        LOGGER.info("Starting Assistant ...")
+        await ass.start()
+        LOGGER.info("Assistant Started.")
+        try:
+            await ass.send_message(LOG_GROUP_ID, "**Assistant Started.**")
+        except:
+            pass
+        try:
+            await app.join_chat("aboutchinnalu")
+            await app.join_chat("aboutchinnalu")
+        except:
+            pass
+    LOGGER.info("Starting Helper Robot ...")
+    await bot.start()
+    LOGGER.info("Helper Robot Started.")
+    try:
+        await bot.send_message(LOG_GROUP_ID, "**sʜᴜᴋʟᴀ ʀᴏʙᴏᴛ ɪs ᴀʟɪᴠᴇ.**")
+    except:
+        pass
+    LOGGER.info("Starting PyTgCalls Client...")
+    await call.start()
+    LOGGER.info("PyTgCalls Client Started.")
+    await sudo_users()
+    
+    
