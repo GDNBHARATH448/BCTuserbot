@@ -22,9 +22,9 @@ else:
         f"├• **𝐔ᴘᴛɪᴍᴇ**: `{str(datetime.now() - START_TIME).split('.')[0]}`\n"
         f"├• **𝐏ʏᴛʜᴏɴ**: `{python_version()}`\n"
         f"├• **𝐏ʏʀᴏɢʀᴀᴍ**: `{__version__}`\n"
-        f"├• **𝐒ᴜᴘᴘᴏʀᴛ-𝐂ʜᴀᴛ**: [˹ ʙᴀʙʏ-ᴍᴜsɪᴄ ™˼𓅂](t.me/+OL6jdTL7JAJjYzVl)\n"
-        f"├• **𝐔ᴘᴅᴀᴛᴇs**: [˹ ʙᴀʙʏ-ᴍᴜsɪᴄ ™˼𓅂](t.me/BABY09_WORLD)\n"
-        f"└• **𝐌ᴀsᴛᴇʀ**: [˹ ʙᴀʙʏ-ᴍᴜsɪᴄ ™˼𓅂](t.me/UTTAM470)"        
+        f"├• **𝐒ᴜᴘᴘᴏʀᴛ-𝐂ʜᴀᴛ**: [˹ ʙᴀʙʏ-ᴍᴜsɪᴄ ™˼𓅂](t.me/aboutchinnalu)\n"
+        f"├• **𝐔ᴘᴅᴀᴛᴇs**: [˹ ʙᴀʙʏ-ᴍᴜsɪᴄ ™˼𓅂](t.me/aboutchinnalu)\n"
+        f"└• **𝐌ᴀsᴛᴇʀ**: [˹ ʙᴀʙʏ-ᴍᴜsɪᴄ ™˼𓅂](t.me/aboutchinnalu)"        
     )
 
 @Client.on_message(
@@ -57,12 +57,12 @@ async def repo(bot: Client, message: Message):
     await asyncio.sleep(1)
     await message.edit("Fetching Source Code.....")
     await asyncio.sleep(1)
-    await message.edit("SORRY MERI JAAN REPO CHAHIYE TO DM KAR LO @UTTAM470")
+    await message.edit("SORRY MERI JAAN REPO CHAHIYE TO DM KAR LO @aboutchinnalu")
 
 
 @Client.on_message(filters.command("creator", ".") & filters.me)
 async def creator(bot: Client, message: Message):
-    await message.edit("https://gitHub.com/BABY-MUSIC")
+    await message.edit("https://github.com/GDNBharat/BCT-userbot-")
 
 
 @Client.on_message(filters.command(["uptime", "up"], ".") & filters.me)
