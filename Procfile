@@ -1,1 +1,1 @@
-worker: python3 -m Chinnaop
+worker: bash setup
