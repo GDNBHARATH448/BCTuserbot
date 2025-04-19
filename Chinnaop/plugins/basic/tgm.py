@@ -8,12 +8,12 @@ from telegraph import Telegraph, exceptions, upload_file
 from ... import *
 from ... import app, SUDO_USER
 
-from SHUKLA.modules.SHASHANK.errors import capture_err
+from Chinnaop.modules.Chinnaop.errors import capture_err
 
 # <=======================================================================================================>
 
 TMP_DOWNLOAD_DIRECTORY = "tg-File/"
-bname = "YaeMiko_Roxbot"  # ᴅᴏɴ'ᴛ ᴇᴅɪᴛ ᴛʜɪᴀ ʟɪɴᴇ
+bname = "Bctxmusicbot"  # ᴅᴏɴ'ᴛ ᴇᴅɪᴛ ᴛʜɪᴀ ʟɪɴᴇ
 telegraph = Telegraph()
 r = telegraph.create_account(short_name=bname)
 auth_url = r["auth_url"]
