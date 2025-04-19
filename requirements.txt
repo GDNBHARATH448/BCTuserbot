@@ -11,6 +11,7 @@ git+https://github.com/badmunda98/pyrofork
 aiohttp
 gtts
 wget
+numpy
 gpytranslate
 pyfiglet
 pydub
