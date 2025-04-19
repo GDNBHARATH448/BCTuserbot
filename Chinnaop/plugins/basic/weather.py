@@ -4,11 +4,11 @@ from html import escape
 import aiohttp
 from pyrogram import filters, Client 
 from pyrogram.types import Message
+from ... import *
 
-from Chinnaop.plugins.help import add_command_help
 from pyrogram import enums
 
-@Client.on_message(filters.command(["weather", "w"], ".") & filters.me)
+@app.on_message(cdz(["weather"])   & filters.me)
 async def get_weather(bot: Client, message: Message):
     if len(message.command) == 1:
         await message.edit("Usage: `.weather Maldives`")
@@ -33,9 +33,7 @@ async def get_weather(bot: Client, message: Message):
             await message.edit(weather, parse_mode=enums.ParseMode.MARKDOWN)
 
 
-add_command_help(
-    "weather",
-    [
-        [".weather", "Gets weather information for provided location."],
-    ],
-)
+__NAME__ = "Wᴇᴀᴛʜᴇʀ"
+__MENU__ = """
+`.weather` - **Gets weather information for provided location..**
+"""
