@@ -27,9 +27,9 @@ from pyrogram.raw.functions.messages import GetStickerSet
 from pyrogram.raw.types import InputStickerSetShortName
 from pyrogram.types import Message
 
-from Chinnaop.helper.PyroHelpers import ReplyCheck
-
-from Chinnaop.plugins.help import add_command_help
+from Chinnaop.modules.Chinnaop.PyroHelpers import ReplyCheck
+from ... import app, SUDO_USER
+from ... import *
 
 
 async def add_text_img(image_path, text):
@@ -171,7 +171,7 @@ def get_arg(message: Message):
         return ""
     return " ".join(split[1:])
 
-@Client.on_message(filters.command(["tikel", "kang", "steal"], ".") & filters.me)
+@app.on_message(filters.command(["tikel", "kang", "steal"], ".") & filters.me)
 async def kang(client: Client, message: Message):
     user = client.me
     replied = message.reply_to_message
@@ -392,7 +392,7 @@ async def get_response(message, client):
     return [x async for x in client.get_chat_history("Stickers", limit=1)][0].text
 
 
-@Client.on_message(filters.command(["packinfo", "stickerinfo"], ".") & filters.me)
+@app.on_message(filters.command(["packinfo", "stickerinfo"], ".") & filters.me)
 async def packinfo(client: Client, message: Message):
     rep = await message.edit_text("`Processing...`")
     if not message.reply_to_message:
@@ -428,7 +428,7 @@ async def packinfo(client: Client, message: Message):
     await rep.edit(output)
 
 
-@Client.on_message(filters.command("stickers", ".") & filters.me)
+@app.on_message(filters.command("stickers", ".") & filters.me)
 async def cb_sticker(client: Client, message: Message):
     query = get_text(message)
     if not query:
@@ -448,7 +448,7 @@ async def cb_sticker(client: Client, message: Message):
     await xx.edit(reply)
 
 
-@Client.on_message(filters.command("tiny", ".") & filters.me)
+@app.on_message(filters.command("tiny", ".") & filters.me)
 async def tinying(client: Client, message: Message):
     reply = message.reply_to_message
     if not (reply and (reply.media)):
@@ -525,7 +525,7 @@ async def tinying(client: Client, message: Message):
     os.remove(ik)
 
 
-@Client.on_message(filters.command(["mmf", "memify"], ".") & filters.me)
+@app.on_message(filters.command(["mm", "memify"], ".") & filters.me)
 async def memify(client: Client, message: Message):
     if not message.reply_to_message_id:
         await message.edit_text("**Plz reply to an sticker!**")
@@ -551,7 +551,7 @@ async def memify(client: Client, message: Message):
     os.remove(meme)
 
 
-@Client.on_message(filters.command(["getsticker", "mtoi"], ".") & filters.me)
+@app.on_message(filters.command(["getsticker", "mtoi"], ".") & filters.me)
 async def stick2png(client: Client, message: Message):
     try:
         await message.edit("`Downloading . . .`")
@@ -577,48 +577,11 @@ async def stick2png(client: Client, message: Message):
             message.chat.id, f"**INFO:** `{e}`", reply_to_message_id=ReplyCheck(message)
         )
 
+__NAME__ = "Sᴛɪᴄᴋᴇʀ"
+__MENU__ = """
+`.kang` - **Reply .kang To Sticker Or Image To Add To Sticker Pack**
+`.packinfo` - **To Get Sticker Pack Information.**
+`.mtoi` - **Reply to sticker to get sticker photo.**
+`.mm` - **Reply To Message Sticker or Photo will be Converted to the specified meme text sticker.**
 
-add_command_help(
-    "sticker",
-    [
-        [
-            f"kang `reply` image",
-            f"Reply .kang To Sticker Or Image To Add To Sticker Pack.",
-        ],
-        [
-            f"kang [emoji] `or` .double [emoji]",
-            f"To add and custom emoji stickers to your sticker pack.\n\n`",
-        ],
-        [
-            f"packinfo `or` .stickerinfo",
-            "To Get Sticker Pack Information.",
-        ],
-        [
-            f"mtoi [reply ke sticker] or .getsticker [reply ke sticker]",
-            "Reply to sticker to get sticker photo.",
-        ],
-        ["stickers [nama sticker]", "To find sticker packs."],
-    ],
-)
-
-
-add_command_help(
-    "memify",
-    [
-        [
-            "mmf Top Text ; Bottom Text",
-            "Reply To Message Sticker or Photo will be Converted to the specified meme text sticker.",
-        ],
-    ],
-)
-
-
-add_command_help(
-    "tiny",
-    [
-        [
-            "tiny [reply ke photo/sticker]",
-            "To Change the Sticker to be Small.",
-        ],
-    ],
-)
+"""
