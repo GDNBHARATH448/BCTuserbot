@@ -2,11 +2,10 @@ import asyncio
 
 from pyrogram import Client, filters
 from pyrogram.types import Message 
+from ... import *
 
-from Chinnaop.plugins.help import add_command_help
 
-
-@Client.on_message(filters.command("del", ".") & filters.me)
+@app.on_message(filters.command("del", ".") & filters.me)
 async def del_msg(client: Client, message: Message):
     msg_src = message.reply_to_message
     if msg_src:
@@ -21,7 +20,7 @@ async def del_msg(client: Client, message: Message):
 
 
 
-@Client.on_message(filters.command("purge", ".") & filters.me)
+@app.on_message(filters.command("purge", ".") & filters.me)
 async def purge(client: Client, message: Message):
     ex = await message.edit_text("`Starting To Purge Messages!`")
     msg = message.reply_to_message
@@ -52,7 +51,7 @@ async def purge(client: Client, message: Message):
 
 
 
-@Client.on_message(filters.command("purgeme", ".") & filters.me)
+@app.on_message(filters.command("purgeme", ".") & filters.me)
 async def purgeme(client: Client, message: Message):
     if len(message.command) != 2:
         return await message.delete()
@@ -83,11 +82,12 @@ async def purgeme(client: Client, message: Message):
     await message.delete()
 
 
-add_command_help(
-    "purge",
-    [
-        ["del", "to delete someone's message."],
-        ["purge", "reply to all messages from your replied."],
-        ["purgeme [count]", "to delete your messages only."],
-    ],
-)
+__NAME__ = "Pᴜʀɢᴇ"
+__MENU__ = """
+`.del` - **to delete someone's message.**
+`.purge` - **reply to all messages from your replied**
+`.purgeme` - **purgeme [count]", "to delete your messages only.**
+`.blockword` - **word has been added to the blacklist**
+`.unblockblockword` - **word has been removed from the blacklist.**
+
+"""
