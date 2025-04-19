@@ -1,13 +1,9 @@
 from asyncio import sleep
-
+from random import choice
 from pyrogram import Client, filters
 from pyrogram.types import Message
-
-
-from Chinnaop.plugins.help import add_command_help
-
-spam_chats = []
-
+from ... import app, SUDO_USER, spam_chats
+from ... import *
 
 def get_arg(message: Message):
     msg = message.text
@@ -17,7 +13,7 @@ def get_arg(message: Message):
         return ""
     return " ".join(split[1:])
 
-@Client.on_message(filters.command("tagall", ".") & filters.me)
+@app.on_message(cdz(["utag"]) & (filters.me | filters.user(SUDO_USER)))
 async def mentionall(client: Client, message: Message):
     chat_id = message.chat.id
     direp = message.reply_to_message
@@ -33,7 +29,7 @@ async def mentionall(client: Client, message: Message):
             break
         usrnum += 1
         usrtxt += f"[{usr.user.first_name}](tg://user?id={usr.user.id}), "
-        if usrnum == 5:
+        if usrnum == 4:
             if args:
                 txt = f"{args}\n\n{usrtxt}"
                 await client.send_message(chat_id, txt)
@@ -47,8 +43,7 @@ async def mentionall(client: Client, message: Message):
     except:
         pass
 
-
-@Client.on_message(filters.command("cancel", ".") & filters.me)
+@app.on_message(cdz(["cancel"]) & (filters.me | filters.user(SUDO_USER)))
 async def cancel_spam(client: Client, message: Message):
     if not message.chat.id in spam_chats:
         return await message.edit("**It seems there is no tagall here.**")
@@ -60,16 +55,19 @@ async def cancel_spam(client: Client, message: Message):
         return await message.edit("**Cancelled.**")
 
 
-add_command_help(
-    "tagall",
-    [
-        [
-            "tagall [text/reply ke chat]",
-            "Tag all the members one by one",
-        ],
-        [
-            "cancel",
-            f"to stop .tagall",
-        ],
-    ],
-          )
+__NAME__ = "Tᴀɢᴀʟʟ"
+__MENU__ = """
+`.utag` - **.utag (message) - to start usertagger**
+`.cancel` - **to stop tagger**
+`.tagall` - **.tagall - to start tagall**
+`.tagallstop` - **to stop tagger**
+`.vctag` - **voice msg tagall**
+`.vctagstop` - **to stop tagger**
+.gntag` - **good night msg tagall**
+`.gntop` - **to stop tagger**
+`.gmtag` - **good morning tagall**
+`.gmstop` - **to stop tagger**
+`.shayari` - **good night msg tagall**
+`.shayaristop` - **to stop tagger**
+
+"""
