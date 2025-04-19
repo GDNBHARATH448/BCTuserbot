@@ -1,55 +1,39 @@
-import asyncio
+import aiohttp
 from io import BytesIO
+from ... import *
+from pyrogram import filters
 
-from pyrogram import Client, filters
-from pyrogram.types import Message
-
-
-from Chinnaop.helper.PyroHelpers import ReplyCheck
-
-from Chinnaop.plugins.help import add_command_help
 
 
 async def make_carbon(code):
-    url = "https://carbonara.vercel.app/api/cook"
-    async with aiosession.post(url, json={"code": code}) as resp:
-        image = BytesIO(await resp.read())
+    url = "https://carbonara.solopov.dev/api/cook"
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, json={"code": code}) as resp:
+            image = BytesIO(await resp.read())
     image.name = "carbon.png"
     return image
 
 
-@Client.on_message(filters.command("carbon", ".") & filters.me)
-async def carbon_func(client: Client, message: Message):
-    text = (
-        message.text.split(None, 1)[1]
-        if len(
-            message.command,
-        )
-        != 1
-        else None
-    )
-    if message.reply_to_message:
-        text = message.reply_to_message.text or message.reply_to_message.caption
-    if not text:
-        return await message.delete()
-    ex = await message.edit_text("`Preparing Carbon . . .`")
-    carbon = await make_carbon(text)
-    await ex.edit("`Uploading . . .`")
-    await asyncio.gather(
-        ex.delete(),
-        client.send_photo(
-            message.chat.id,
-            carbon,
-            caption=f"**Carbonised by** {client.me.mention}",
-            reply_to_message_id=ReplyCheck(message),
-        ),
-    )
+
+@app.on_message(cdz(["carbon"]) & filters.me)
+async def _carbon(client, message):
+    replied = message.reply_to_message
+    if not replied:
+        await message.reply_text("**ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴛᴇxᴛ ᴍᴇssᴀɢᴇ ᴛᴏ ᴍᴀᴋᴇ ᴀ ᴄᴀʀʙᴏɴ.**")
+        return
+    if not (replied.text or replied.caption):
+        return await message.reply_text("**ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴛᴇxᴛ ᴍᴇssᴀɢᴇ ᴛᴏ ᴍᴀᴋᴇ ᴀ ᴄᴀʀʙᴏɴ.**")
+    text = await message.reply("Processing...")
+    carbon = await make_carbon(replied.text or replied.caption)
+    await text.edit("**ᴜᴘʟᴏᴀᴅɪɴɢ...**")
+    await message.reply_photo(carbon)
+    await text.delete()
     carbon.close()
+     
 
+__NAME__ = " Cᴀʀʙᴏɴ "
+__MENU__ = """
+`.carbon` - **Carbonize text with default settings.**
+`.paste` - **txt,file type on carbon paper .**
 
-add_command_help(
-    "carbon",
-    [
-        ["carbon <reply>", "Carbonize text with default settings."],
-    ],
-)
+"""
