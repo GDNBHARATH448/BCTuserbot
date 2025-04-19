@@ -1,1 +1,1 @@
- python3 -m Chinnaop
+ python-3.10.6
