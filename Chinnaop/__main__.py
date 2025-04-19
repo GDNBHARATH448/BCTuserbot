@@ -1,60 +1,42 @@
-import asyncio
-from pyrogram import Client, idle
-from flask import Flask
-import threading
-import requests
-import time
+import asyncio, importlib
 
-# Flask app initialize kar rahe hain
-flask_app = Flask(__name__)
+from pytgcalls import idle
 
-# Flask app ka ek basic route
-@flask_app.route('/')
-def home():
-    return "Flask app running on port 8000"
+from . import logs, plugs, vars
+from .plugins import ALL_PLUGINS
+from .modules.clients.clients import run_async_clients
+from .modules.clients.enums import run_async_enums
+from .modules.helpers.inline import run_async_inline
 
-# Flask app ko alag thread mein run karne ka function
-def run_flask():
-    flask_app.run(host="0.0.0.0", port=8000)
 
-# Keep-alive function jo regular ping bhejta rahega
-def keep_alive():
-    while True:
-        try:
-            # Apne Render app ka URL daal kar ping karein
-            requests.get("https://Chinna-userbot-lbkq.onrender.com")
-        except Exception as e:
-            print(f"Ping error: {e}")
-        # Har 5 minute mein ping karein
-        time.sleep(300)
-
-# Bot ke start karne ka async function
-async def start_bot():
-    await app.start()
-    print("LOG: Founded Bot token Booting Zeus.")
-    
-    # Sabhi clients ko start kar rahe hain
-    for cli in clients:
-        try:
-            await cli.start()
-            ex = await cli.get_me()
-            await join(cli)
-            print(f"Started {ex.first_name} 🔥")
-            ids.append(ex.id)
-        except Exception as e:
-            print(f"Error: {e}")
-    
-    # Bot ko idle mode mein daal rahe hain taaki continuous run ho
+async def main():
+    await run_async_clients()
+    for all_plugin in ALL_PLUGINS:
+        imported_plugin = importlib.import_module(
+            "Chinnaop.plugins" + all_plugin
+        )
+        if (hasattr
+            (
+                imported_plugin, "__NAME__"
+            ) and imported_plugin.__NAME__
+        ):
+            imported_plugin.__NAME__ = imported_plugin.__NAME__
+            if (
+                hasattr(
+                    imported_plugin, "__MENU__"
+                ) and imported_plugin.__MENU__
+            ):
+                plugs[imported_plugin.__NAME__.lower()
+                ] = imported_plugin
+    await run_async_enums()
+    logs.info(">> Successfully Imported All Plugins.")
+    await run_async_inline()
+    logs.info("Successfully Deployed !!")
+    logs.info("Do Visit - @MASTIWITHFRIENDSXD")
     await idle()
 
-# Flask app ko alag thread mein start kar rahe hain
-flask_thread = threading.Thread(target=run_flask)
-flask_thread.start()
 
-# Keep-alive function ko alag thread mein start kar rahe hain
-keep_alive_thread = threading.Thread(target=keep_alive)
-keep_alive_thread.start()
-
-# Bot ko asyncio loop ke through run kar rahe hain
-loop = asyncio.get_event_loop()
-loop.run_until_complete(start_bot())
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
+    print("Userbot Stopped !\nGoodBye ...")
