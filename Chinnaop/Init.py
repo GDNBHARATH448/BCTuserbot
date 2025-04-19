@@ -70,20 +70,20 @@ if STRING_SESSION6:
 
 if STRING_SESSION7:
    print("Client7: Found.. Starting.. 📳")
-   client7 = Client(name="seven", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION7, plugins=dict(root="UTTAM/plugins"))
+   client7 = Client(name="seven", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION7, plugins=dict(root="Chinnaop/plugins"))
    clients.append(client7)
 
 if STRING_SESSION8:
    print("Client8: Found.. Starting.. 📳")
-   client8 = Client(name="eight", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION8, plugins=dict(root="UTTAM/plugins"))
+   client8 = Client(name="eight", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION8, plugins=dict(root="Chinnaop/plugins"))
    clients.append(client8)
 
 if STRING_SESSION9:
    print("Client9: Found.. Starting.. 📳")
-   client9 = Client(name="nine", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION9, plugins=dict(root="UTTAM/plugins"))
+   client9 = Client(name="nine", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION9, plugins=dict(root="Chinnaop/plugins"))
    clients.append(client9)
 
 if STRING_SESSION10:
    print("Client10: Found.. Starting.. 📳")
-   client10 = Client(name="ten", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION10, plugins=dict(root="UTTAM/plugins"))
+   client10 = Client(name="ten", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION10, plugins=dict(root="Chinnaop/plugins"))
    clients.append(client10)
