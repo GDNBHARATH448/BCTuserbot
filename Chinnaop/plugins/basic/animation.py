@@ -10,7 +10,7 @@ from pyrogram.types import Message
 
 from ... import *
 from Chinnaop.modules.Chinnaop.basic import edit_or_reply, get_text
-from SHUKLA.modules.SHASHANK.constants import MEMES
+from Chinnaop.modules.Chinnaop.constants import MEMES
 
 
 
