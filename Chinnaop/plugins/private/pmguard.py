@@ -46,7 +46,7 @@ async def setpmmsg(client, message):
         await message.edit("**What message to set**")
         return
     if arg == "default":
-        await Chinnaop.set_block_message(chinna.BLOCKED)
+        await Chinnaop.set_block_message(Chinnaop.BLOCKED)
         await message.edit("**Block message set to default**.")
         return
     await Chinnaop.set_block_message(f"`{arg}`")
