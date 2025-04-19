@@ -90,7 +90,7 @@ requirements_path = path.join(
 
 
 def restart():
-    os.execvp(sys.executable, [sys.executable, "-m", "UTTAM"])
+    os.execvp(sys.executable, [sys.executable, "-m", "Chinnaop"])
 
 async def is_heroku():
     return "heroku" in socket.getfqdn()
@@ -226,7 +226,7 @@ async def upstream(client: Client, message: Message):
             repo.__del__()
             return
         await status.edit(
-            "`[HEROKU]: UTTAM-Userbot Deploy Update is in Progress...`"
+            "`[HEROKU]: Chinnaop-Userbot Deploy Update is in Progress...`"
         )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
@@ -243,7 +243,7 @@ async def upstream(client: Client, message: Message):
         except GitCommandError:
             pass
         await status.edit(
-            "`UTTAM-Userbot Successfully Updated! Userbot can be used again.`"
+            "`Chinnaop-Userbot Successfully Updated! Userbot can be used again.`"
         )
     else:
         try:
@@ -252,9 +252,9 @@ async def upstream(client: Client, message: Message):
             repo.git.reset("--hard", "FETCH_HEAD")
         await updateme_requirements()
         await status.edit(
-            "`UTTAM-Userbot Successfully Updated! Userbot can be used again.`",
+            "`Chinnaop-Userbot Successfully Updated! Userbot can be used again.`",
         )
-        args = [sys.executable, "-m", "UTTAM"]
+        args = [sys.executable, "-m", "Chinnaop"]
         execle(sys.executable, *args, environ)
         return
 
@@ -319,7 +319,7 @@ async def updatees(client: Client, message: Message):
 add_command_help(
     "update",
     [
-        ["update", "To see a list of the latest updates from UTTAM-Userbot."],
+        ["update", "To see a list of the latest updates from Chinnaop-Userbot."],
         ["update deploy", "To update userbot."],
     ],
 )
