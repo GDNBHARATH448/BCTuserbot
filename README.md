@@ -2,41 +2,30 @@
 
 <p align="center"> 𝗔 𝗣𝗢𝗪𝗘𝗥𝗙𝗨𝗟 𝗜𝗗 𝗨𝗦𝗘𝗥𝗕𝗢𝗧 </p>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-<h1 align="center"><b>Userbot ™˼ ʙᴏᴛ 𓅂</b></h1>
-<p align="center"><a href="Https://t.me/aboutchinnalu"><img src="https://graph.org/file/4c5a86c94afb9f7cd04ac5079f73c98699c4f86.jpg" width="600"></a></p>
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-
-
-<h3 align="center">
-    ─「 chinna ᴏɴ ʜᴇʀᴏᴋᴜ 」─
-</h3>
-
-<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/GDNBharat/Toxic-userbot"> <img src="https://img.shields.io/badge/Deploy%20On%20Heroku-green?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
-
-
-
-
-<p align="center"## 𝖣𝖤𝖯𝖫𝖮𝖸 𝖳𝖮 𝖱𝖤𝖭𝖣𝖤𝖱
-
-[![DEPLOY TO RENDER](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/GDNBharat/BCT-userbot-)
-
-## String Session
-
-<p align="center"><a href="https://t.me/"> <img src="https://img.shields.io/badge/String%20Session-black?style=for-the-badge&logo=replit" width="220" height="38.45"/></a></p>
-
-
-![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Bct-MUSIC&repo=chinnaop_USERBOT&theme=flag-india)
-
-
-<h3 align="center">
-    ─「 sᴜᴩᴩᴏʀᴛ 」─
-</h3>
-
-<p align="center">
-<a href="https://graph.org/file/4c5a86c94afb9f7cd04ac5079f73c98699c4f86.jpg"><img src="https://img.shields.io/badge/-Support%20Group-blue.svg?style=for-the-badge&logo=Telegram"></a>
+<p align="center"><a href="https://t.me/Reddragon_op"><img src="https://files.catbox.moe/uufiry.jpg" width="400"></a></p>
 </p>
+<h6 align="center">
+  <b>• sᴛʀᴀɴɢᴇʀ ᴜsᴇʀ ʙᴏᴛ •</b>
+</h6>
+
+----
+
+<h2> Heroku Deployment </h2>
+
+> The easy way to host this bot, deploy to Heroku 
+<br>
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https://github.com/GDNBharat/BCT-userbot-)
+
+## 🖇 Generating Pyrogram String Session
+
+<p>
+<a href="https://t.me/aboutchinnalu"><img src="https://img.shields.io/badge/TG%20String%20Gen%20Bot-blueviolet?style=for-the-badge&logo=appveyor" width="200""/></a>
+
+### Contact :
+<a href="https://t.me/Reddragon_op"><img title="Telegram" src="https://img.shields.io/badge/Telegram-%23000000.svg?&style=for-the-badge&logo=telegram&logoColor=61DAFB"></a>
+
+
 
 <p align="center">
 <a href="https://t.me/aboutchinnalu"><img src="https://img.shields.io/badge/-Support%20Channel-blue.svg?style=for-the-badge&logo=Telegram"></a>
