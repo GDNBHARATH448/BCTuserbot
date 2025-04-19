@@ -1,6 +1,5 @@
 import asyncio
 from pyrogram import Client, idle
-from Chinnaop import clients, app, ids
 from flask import Flask
 import threading
 import requests
