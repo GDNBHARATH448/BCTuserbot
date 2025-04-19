@@ -2,7 +2,7 @@
 
 <p align="center"> 𝗔 𝗣𝗢𝗪𝗘𝗥𝗙𝗨𝗟 𝗜𝗗 𝗨𝗦𝗘𝗥𝗕𝗢𝗧 </p>
 
-<p align="center"><a href="https://t.me/Reddragon_op"><img src="https://files.catbox.moe/uufiry.jpg" width="400"></a></p>
+<p align="center"><a href="https://t.me/Reddragon_op"><img src="https://graph.org/file/4c5a86c94afb9f7cd04ac5079f73c98699c4f86.jpg" width="400"></a></p>
 </p>
 <h6 align="center">
   <b>• sᴛʀᴀɴɢᴇʀ ᴜsᴇʀ ʙᴏᴛ •</b>
