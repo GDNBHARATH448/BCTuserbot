@@ -56,7 +56,7 @@ async def setpmmsg(client, message):
 @Client.on_message(filters.command(["allow", "ap", "approve", "a"], ["."]) & filters.me & filters.private)
 async def allow(client, message):
     chat_id = message.chat.id
-    pmpermit, pm_message, limit, block_message = await chinna.get_pm_settings()
+    pmpermit, pm_message, limit, block_message = await Chinnaop.get_pm_settings()
     await Chinnaop.allow_user(chat_id)
     await message.edit(f"**I have allowed [you](tg://user?id={chat_id}) to PM me.**")
     async for message in client.search_messages(
@@ -83,7 +83,7 @@ async def deny(client, message):
 )
 async def reply_pm(app: Client, message):
     global FLOOD_CTRL
-    pmpermit, pm_message, limit, block_message = await UTTAM.get_pm_settings()
+    pmpermit, pm_message, limit, block_message = await Chinnaop.get_pm_settings()
     user = message.from_user.id
     user_warns = 0 if user not in USERS_AND_WARNS else USERS_AND_WARNS[user]
     if PM_LOGGER:
