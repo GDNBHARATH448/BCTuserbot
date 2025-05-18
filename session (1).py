@@ -7,7 +7,7 @@ from pyrogram import Client
 # guide them
 
 intro = """
-@SHIVANSH474 Corporation
+@sinnalu Corporation
 Get the following values by logging to,
 
 https://my.telegram.org
@@ -39,7 +39,7 @@ API_HASH = input("\nEnter API HASH: ")
 with Client("in_memory=True", api_id=int(API_ID), api_hash=API_HASH) as app:
     app.send_message(
         "me",
-        f"This Is Your Shukla Userbot • [ `SESSION` ]\n\n```{app.export_session_string()}```\n\n⚠️• Don't share this with anyone !!\n\nCreate Again •)",
+        f"This Is Your Chinnaop Userbot • [ `SESSION` ]\n\n```{app.export_session_string()}```\n\n⚠️• Don't share this with anyone !!\n\nCreate Again •)",
         disable_web_page_preview=True,
     )
     print(
