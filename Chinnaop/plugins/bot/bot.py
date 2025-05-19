@@ -4,10 +4,10 @@ from pyrogram import Client, filters
 from pyrogram.errors import MessageDeleteForbidden
 from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
 
-from RAUSHAN import CMD_HELP, app
-from RAUSHAN.helper.data import Data
-from RAUSHAN.helper.inline import cb_wrapper, paginate_help
-from RAUSHAN import ids as users
+from Chinnaop import CMD_HELP, app
+from Chinnaop.helper.data import Data
+from Chinnaop.helper.inline import cb_wrapper, paginate_help
+from Chinnaop import ids as users
 
 @Client.on_callback_query()
 async def _callbacks(_, callback_query: CallbackQuery):
@@ -62,7 +62,7 @@ async def on_plug_in_cb(_, callback_query: CallbackQuery):
     this_command = f"──「 **Help For {str(modul_name).upper()}** 」──\n\n"
     for x in commands:
         this_command += f"  •  **Command:** `.{str(x)}`\n  •  **Function:** `{str(commands[x])}`\n\n"
-    this_command += "© @ll_ALPHA_BABY_lll"
+    this_command += "© @aboutchinnalu"
     bttn = [
         [InlineKeyboardButton(text="Return", callback_data="reopen")],
     ]
