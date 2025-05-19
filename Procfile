@@ -1,2 +1,2 @@
-worker: bin/bash
+worker: bin start.sh
 
