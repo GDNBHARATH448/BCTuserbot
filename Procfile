@@ -1,2 +1,2 @@
-worker: bin start.sh
+worker: python3 -m Chinnaop
 
