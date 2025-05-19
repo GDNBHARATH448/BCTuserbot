@@ -31,11 +31,11 @@ if os.path.exists("Internal"):
 API_ID = int(getenv("API_ID", "28362850"))
 API_HASH = getenv("API_HASH", "34f9cb93364db16fc45d003e4c81d97a")
 BOT_TOKEN = getenv("BOT_TOKEN", "7500951257:AAFwz8XYQ_bFBjiqcFeE9yN0QfU3-Kl6gik")
-STRING_SESSION = getenv("STRING_SESSION", "BQGwyGIAoRIRif3u5d3H4duLSv3gek2nLGUEONWsZPrNuVGedxj-XYcfUQ7dRXAKEKlTC9bMK6UNEchtwVHZm-FD--5YovmUiYgQuUBh-0NZ6DJ0zL7MinCV-2PAsI5apXpfqvpvwaPAPuP93AsSsrnUvOr0fyjdObqx2Xhg_jQrAmCfgF364LDL7wCHbT33xMRyoLXDUDIsE5tK6tfJoSGT-FnF1HjqPd3bj_pmvdkwvOfrl8D8r98MzfSHXTT43NIKq56bpzGJJxJiwMm0lmNvijPkEgiUNshgxdKSqmq9ocbXEchNjLRwanKYE1AQFCMdIbq8GAOImz1ddsDNhd9vYMNw6wAAAAHoAeY6AA")
+STRING_SESSION = getenv("STRING_SESSION", "BQGlvSgANgNrYILuKeDEVdAJVCRke8RvdVhzF8PUenm-7aGjA5L81SJP-vrcAOha7DAWltexHW0Jwa3U2z5kro32IT7f_ScNwI2gSvvcf_iTZZzd_xOYmDA0-8Td1FO1ctI3w15mMz5_mxRoIpEqkLDR9OhIVsu9EdrP6zsgiuQdo880pSCmmsrcc9Qc2rB8qria6zI9fbZRrG1Lcvg3xf0tsx59BNaJ_kGTnPi-9KfxDnUXujzBpxQiCPQOTc9Dtla3yPMIMvNrVNfNcCUIPFTmI5iZXWavOznQn66tLvO89NFzUCU0GbL_HO3-8GI1GIJrQhNdHSYPoT7vyCCwdUt1l9I0nQAAAAHoAeY6AA")
 MONGO_DB_URL = getenv("MONGO_DB_URL", "mongodb+srv://VamsixD:VamsixD@vamsi.x7gyybv.mongodb.net/?retryWrites=true&w=majority")
 LOG_GROUP_ID = int(getenv("LOG_GROUP_ID", 0))
 OWNER_ID = int(getenv("OWNER_ID", "8187405882"))
-OWNER_USERNAME = getenv("OWNER_USERNAME", "I_love_u143")
+OWNER_USERNAME = getenv("OWNER_USERNAME", "sinnalu")
 SUDO_USERS = list(map(int, getenv("SUDO_USERS", "8092874636").split()))
 ALIVE_PIC = getenv("ALIVE_PIC", "https://graph.org/file/9426105f9b5c442283980-555887199617d7eaf8.jpg")
 
