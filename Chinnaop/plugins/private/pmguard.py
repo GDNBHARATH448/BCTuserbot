@@ -5,7 +5,7 @@ from Chinnaop.modules.help import *
 from pyrogram.methods import messages
 from .pmguard import get_arg, denied_users
 
-import Chinnaop.database.pmpermitdb as RAUSHAN
+import Chinnaop.database.pmpermitdb as Chinnaop
 
 
 
