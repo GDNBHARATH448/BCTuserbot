@@ -1,2 +1,2 @@
-worker: bin/sh
+worker: bin/bash
 
