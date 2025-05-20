@@ -11,9 +11,9 @@ from pyrogram.types import Message
 from reportlab.graphics import renderPM
 from svglib.svglib import svg2rlg
 
-from UTTAM.helper.PyroHelpers import ReplyCheck
-from UTTAM.helper.aiohttp_helper import AioHttp
-from UTTAM.plugins.help import add_command_help
+from Chinnaop.helper.PyroHelpers import ReplyCheck
+from Chinnaop.helper.aiohttp_helper import AioHttp
+from Chinnaop.plugins.help import add_command_help
 
 
 @Client.on_message(filters.command(["ggraph", "commitgraph"], ".") & filters.me)
