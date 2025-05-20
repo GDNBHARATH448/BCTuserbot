@@ -6,11 +6,11 @@ from pyrogram import Client, filters
 from pyrogram.raw import functions
 from pyrogram.types import Message
 
-from UTTAM import StartTime, app, SUDO_USER
-from UTTAM.helper.PyroHelpers import SpeedConvert
-from UTTAM.plugins.bot.inline import get_readable_time
+from Chinnaop import StartTime, app, SUDO_USER
+from Chinnaop.helper.PyroHelpers import SpeedConvert
+from Chinnaop.plugins.bot.inline import get_readable_time
 
-from UTTAM.plugins.help import add_command_help
+from Chinnaop.plugins.help import add_command_help
 
 class WWW:
     SpeedTest = (
