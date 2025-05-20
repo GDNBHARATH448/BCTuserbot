@@ -2,11 +2,10 @@ from datetime import datetime
 
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
-from ... import app, SUDO_USER
-from ... import *
+from Chinnaop.plugins.help import *
 
 
-@app.on_message(cdz(["stats"]) & (filters.me | filters.user(SUDO_USER)))
+@Client.on_message(filters.command(["stats", "status"], ".") & filters.me)
 async def stats(client: Client, message: Message):
     Man = await message.edit_text("`Collecting stats...`")
     start = datetime.now()
@@ -49,7 +48,10 @@ async def stats(client: Client, message: Message):
         )
     )
 
-__NAME__ = "Sᴛᴀᴛs"
-__MENU__ = """
-`.stats` - **to check your account status.**
-"""
+
+add_command_help(
+    "stats",
+    [
+        ["stats", "to check your account status."],
+    ],
+)
