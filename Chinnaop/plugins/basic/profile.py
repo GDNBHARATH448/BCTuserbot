@@ -4,15 +4,15 @@ import os
 import sys
 from re import sub
 from time import time
-from ... import app, SUDO_USER
-from ... import *
+
 
 from pyrogram import Client, filters, enums
 from pyrogram.types import Message
 
-from ... import *
-from Chinnaop.modules.Chinnaop.PyroHelpers import ReplyCheck
+from Chinnaop import SUDO_USER
+from Chinnaop.helper.PyroHelpers import ReplyCheck
 
+from Chinnaop.plugins.help import add_command_help
 
 flood = {}
 profile_photo = "cache/pfp.jpg"
@@ -82,7 +82,8 @@ async def extract_user_and_reason(message, sender_chat=False):
 async def extract_user(message):
     return (await extract_user_and_reason(message))[0]
 
-@app.on_message(cdz(["unblock"]) & (filters.me | filters.user(SUDO_USER))
+@Client.on_message(
+    filters.command(["unblock"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def unblock_user_func(client: Client, message: Message):
     user_id = await extract_user(message)
@@ -97,7 +98,8 @@ async def unblock_user_func(client: Client, message: Message):
     umention = (await client.get_users(user_id)).mention
     await message.edit(f"**Successfully Unblocked** {umention}")
 
-@app.on_message(cdz(["block"]) & (filters.me | filters.user(SUDO_USER))
+@Client.on_message(
+    filters.command(["block"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def block_user_func(client: Client, message: Message):
     user_id = await extract_user(message)
@@ -113,7 +115,8 @@ async def block_user_func(client: Client, message: Message):
     await tex.edit_text(f"**Successfully blocked** {umention}")
 
 
-@app.on_message(cdz(["setname"]) & (filters.me | filters.user(SUDO_USER))
+@Client.on_message(
+    filters.command(["setname"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def setname(client: Client, message: Message):
     tex = await message.reply_text("`Processing . . .`")
@@ -133,7 +136,8 @@ async def setname(client: Client, message: Message):
             "Provide a text to set as your name."
         )
 
-@app.on_message(cdz(["setbio"]) & (filters.me | filters.user(SUDO_USER))
+@Client.on_message(
+    filters.command(["setbio"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def set_bio(client: Client, message: Message):
     tex = await message.edit_text("`Processing . . .`")
@@ -150,7 +154,8 @@ async def set_bio(client: Client, message: Message):
         return await tex.edit("Provide text to set as bio.")
 
 
-@app.on_message(cdz(["setpfp"]) & (filters.me | filters.user(SUDO_USER))
+@Client.on_message(
+    filters.command(["setpfp"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def set_pfp(client: Client, message: Message):
     replied = message.reply_to_message
@@ -175,7 +180,8 @@ async def set_pfp(client: Client, message: Message):
         await message.delete()
 
 
-@app.on_message(cdz(["ypfp"]) & (filters.me | filters.user(SUDO_USER))
+@Client.on_message(
+    filters.command(["vpfp"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def view_pfp(client: Client, message: Message):
     user_id = await extract_user(message)
@@ -195,13 +201,17 @@ async def view_pfp(client: Client, message: Message):
         os.remove(profile_photo)
 
 
-
-__NAME__ = "Pʀᴏғɪʟᴇ"
-__MENU__ = """
-`.block` **to block someone on telegram**
-`.unblock` **to unblock someone on telegram**
-`.setname` **set your profile name.**
-`.setpfp` **reply with image to set your profile pic.**
-`.vpfp` **
-`.setbio` **set an bio.**Reply with video to set your video profile.***   
-"""
+add_command_help(
+    "profile",
+    [
+        ["block", "to block someone on telegram"],
+        ["unblock", "to unblock someone on telegram"],
+        ["setname", "set your profile name."],
+        ["setbio", "set an bio."],
+        [
+            "setpfp",
+            f"reply with image to set your profile pic.",
+        ],
+        ["vpfp", "Reply with video to set your video profile."],
+    ],
+                                      )
