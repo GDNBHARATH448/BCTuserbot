@@ -59,4 +59,4 @@ for x in special_emojis_dict:
     special_emoji_help.append([f".{x}", special_emojis_dict[x]["help"]])
 
 add_command_help("emoji", special_emoji_help)
-SATYA_USERBOT/UTTAM/plugins/fun/emoji.py at main · aboutchinnalu/chinna_USERBOT
+
