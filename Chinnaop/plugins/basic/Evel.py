@@ -7,8 +7,8 @@ import traceback
 from pyrogram import filters, Client
 from pyrogram.types import Message
 
-from UTTAM.database import cli as database
-from UTTAM.helper.PyroHelpers import ReplyCheck
+from Chinnaop.database import cli as database
+from Chinnaop.helper.PyroHelpers import ReplyCheck
 
 
 @Client.on_message(
