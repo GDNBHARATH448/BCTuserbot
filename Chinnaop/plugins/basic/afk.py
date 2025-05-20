@@ -5,8 +5,8 @@ import humanize
 from pyrogram import filters, Client
 from pyrogram.types import Message
 
-from UTTAM.helper.PyroHelpers import GetChatID, ReplyCheck
-from UTTAM.plugins.help import add_command_help
+from Chinnaop.helper.PyroHelpers import GetChatID, ReplyCheck
+from Chinnaop.plugins.help import add_command_help
 
 AFK = False
 AFK_REASON = ""
