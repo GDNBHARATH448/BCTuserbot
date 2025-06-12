@@ -1,24 +1,26 @@
-from flask import Flask
-import threading
-from Chinnaop import LOGGER, AMBOT
+import asyncio
+import importlib
+from pyrogram import Client, idle
+from Chinnaop.helper import join
+from Chinnaop.modules import ALL_MODULES
+from Chinnaop import clients, app, ids
 
-app = Flask(__name__)
+async def start_bot():
+    await app.start()
+    print("LOG: Founded Bot token Booting Zeus.")
+    for all_module in ALL_MODULES:
+        importlib.import_module("Chinnaop.modules" + all_module)
+        print(f"Successfully Imported {all_module} 💥")
+    for cli in clients:
+        try:
+            await cli.start()
+            ex = await cli.get_me()
+            await join(cli)
+            print(f"Started {ex.first_name} 🔥")
+            ids.append(ex.id)
+        except Exception as e:
+            print(f"{e}")
+    await idle()
 
-@app.route("/")
-def home():
-    return "Bot is running"
-
-def run_flask():
-    app.run(host="0.0.0.0", port=8000)
-
-def run_bot():
-    LOGGER.info("The PURVI CHAT BOT Started.")
-    AMBOT().run()
-
-if __name__ == "__main__":
-    # Create a thread for Flask server
-    flask_thread = threading.Thread(target=run_flask)
-    flask_thread.start()
-
-    # Run the bot in the main thread
-    run_bot()
+loop = asyncio.get_event_loop()
+loop.run_until_complete(start_bot())
