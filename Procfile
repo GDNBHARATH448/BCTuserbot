@@ -1,2 +1,2 @@
-worker: bash starsh
+worker: bash startsh
 
