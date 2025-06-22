@@ -3,7 +3,7 @@ from pyrogram.types import ChatPermissions, Message
 DEVS = [7037832227, 5959308905]
 from Chinnaop.helper.PyroHelpers import get_ub_chats
 from Chinnaop.modules.basic.profile import extract_user, extract_user_and_reason
-from Chinnaop.database import gbandb as RAUSHAN
+from Chinnaop.database import gbandb as Chinnaop
 from Chinnaop.database import gmutedb as Gmute
 from Chinnaop.modules.help import add_command_help
 
